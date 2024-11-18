@@ -6,6 +6,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { MdDirectionsRun, MdSelfImprovement, MdFitnessCenter } from "react-icons/md";
 
 const ActivityLogger = () => {
+    console.log("ActivityLogger component rendering...");
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {

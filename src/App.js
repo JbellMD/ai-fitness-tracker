@@ -5,6 +5,7 @@ import ActivityLogger from "./components/ActivityLogger";
 import Insights from "./components/Insights";
 
 function App() {
+  console.log("App is rendering...");
   return (
     <Router>
       <div className="App">
