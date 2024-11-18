@@ -1,3 +1,40 @@
+/* General Styles */
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Header Styles */
+.App-header {
+  background-color: #028090;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.App-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.App-header p {
+  font-size: 1rem;
+  margin: 10px 0 0;
+}
+
+/* Main Content Styles */
+main {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+
 .activity-logger {
   background: #f9f9f9;
   padding: 20px;

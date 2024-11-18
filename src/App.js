@@ -24,11 +24,19 @@ function App() {
 
   return (
     <div className="App">
-      <ActivityLogger />
-      <Insights />
+      {/* Header Section */}
+      <header className="App-header">
+        <h1>AI Fitness Tracker</h1>
+        <p>Log your activities and gain insights into your fitness journey!</p>
+      </header>
+
+      {/* Main Content */}
+      <main>
+        <ActivityLogger />
+        <Insights />
+      </main>
     </div>
   );
 }
 
 export default App;
-
