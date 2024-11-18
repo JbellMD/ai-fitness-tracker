@@ -5,7 +5,7 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 
 const Insights = () => {
-    const [activities, setActivities] = useState([]);
+    const [, setActivities] = useState([]); // Ignore the first value
     const [insight, setInsight] = useState("");
     const [loading, setLoading] = useState(true);
 
