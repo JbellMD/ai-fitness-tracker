@@ -1,81 +1,136 @@
 /* General Styles */
-.App {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
-  background-color: #f0f4f8;
-  min-height: 100vh;
+body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
+  padding: 0;
+  background-color: #eef2f5;
+  color: #333;
 }
 
-/* Header Styles */
-.App-header {
-  background-color: #028090;
-  color: white;
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+}
+
+/* Header */
+.App-header {
+  background-color: #114b5f;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .App-header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin: 0;
 }
 
 .App-header p {
   font-size: 1rem;
-  margin: 10px 0 0;
+  margin-top: 5px;
 }
 
-/* Main Content Styles */
-main {
-  margin: 20px auto;
-  max-width: 800px;
-}
-
-
-.activity-logger {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Authentication Container */
+.auth-container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 400px;
+  text-align: center;
+}
+
+.auth-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-container input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth-btn {
+  padding: 10px 15px;
+  background-color: #028090;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #026f75;
+}
+
+.google-btn {
+  background-color: #db4437;
+}
+
+.google-btn:hover {
+  background-color: #c0392b;
+}
+
+.link {
+  color: #028090;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.error-text {
+  color: #f44336;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f;
+}
+
+
+/* Activity Logger Specific Styles */
+.activity-logger {
+  max-width: 500px;
   margin: 20px auto;
 }
 
 .activity-form {
   display: flex;
   flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input,
-select {
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.submit-button {
-  padding: 10px;
-  background-color: #028090;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #026f75;
+  gap: 15px;
 }
 
 .activity-icons {
@@ -84,23 +139,106 @@ select {
   margin-top: 20px;
 }
 
-.insights {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.insights h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.insights p {
+.success-text {
+  color: #4caf50; /* Green for success */
   font-size: 1rem;
-  color: #028090;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Optional fade-in animation for the success message */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-text {
+  color: #4caf50; /* Green for success */
+  font-size: 1rem;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Optional fade-in animation for the success message */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nutrition-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nutrition-logs {
   margin-top: 20px;
+  text-align: left;
+}
+
+.nutrition-logs h3 {
+  font-size: 1.4rem;
+  color: #114b5f;
+}
+
+.nutrition-logs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nutrition-logs li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  background-color: #028090;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #026f75;
+}
+
+.nav-links .logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links .logout-btn:hover {
+  background-color: #d32f2f;
 }
