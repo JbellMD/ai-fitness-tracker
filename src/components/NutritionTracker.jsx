@@ -57,7 +57,7 @@ const NutritionTracker = () => {
   }, []);
 
   return (
-    <div className="card">
+    <div className="white-box nutrition-tracker">
       <h2>Nutrition Tracker</h2>
       <form onSubmit={handleAddMeal} className="nutrition-form">
         <input

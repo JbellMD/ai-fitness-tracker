@@ -45,7 +45,7 @@ const ActivityLogger = () => {
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
-      className="activity-logger card"
+      className="white-box activity-logger"
     >
       <h2>Log Your Activity</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="activity-form">
@@ -85,4 +85,3 @@ const ActivityLogger = () => {
 };
 
 export default ActivityLogger;
-

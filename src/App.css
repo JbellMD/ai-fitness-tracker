@@ -36,7 +36,7 @@ body {
 
 /* Header */
 .App-header {
-  background-color: #114b5f;
+  background-color: #08a4cf99;
   color: white;
   padding: 15px 30px;
   border-radius: 10px;
@@ -86,7 +86,7 @@ body {
 
 .auth-btn {
   padding: 10px 15px;
-  background-color: #028090;
+  background-color: #08a4cf;
   color: white;
   font-size: 1rem;
   border: none;
@@ -96,7 +96,7 @@ body {
 }
 
 .auth-btn:hover {
-  background-color: #026f75;
+  background-color: #08a4cf;
 }
 
 .google-btn {
@@ -139,17 +139,36 @@ body {
   background-color: #d32f2f;
 }
 
+/* Shared Style for White Box Containers */
+.white-box {
+  background: white; /* White background for the box */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside the box */
+  margin: 20px auto; /* Center the box with margin */
+  width: 100%; /* Take up full width available */
+  max-width: 600px; /* Limit max width for better readability */
+}
 
-/* Activity Logger Specific Styles */
+/* Specific Adjustments for Activity Logger */
 .activity-logger {
-  max-width: 500px;
-  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.activity-logger h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .activity-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .activity-icons {
@@ -158,60 +177,36 @@ body {
   margin-top: 20px;
 }
 
-.success-text {
-  color: #4caf50; /* Green for success */
-  font-size: 1rem;
-  margin-top: 15px;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
+/* Specific Adjustments for Nutrition Tracker */
+.nutrition-tracker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Optional fade-in animation for the success message */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.success-text {
-  color: #4caf50; /* Green for success */
-  font-size: 1rem;
-  margin-top: 15px;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Optional fade-in animation for the success message */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.nutrition-tracker h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .nutrition-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .nutrition-logs {
   margin-top: 20px;
-  text-align: left;
+  width: 100%;
 }
 
 .nutrition-logs h3 {
   font-size: 1.4rem;
   color: #114b5f;
+  margin-bottom: 10px;
 }
 
 .nutrition-logs ul {
@@ -227,6 +222,27 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+.success-text {
+  color: #4caf50; /* Green for success */
+  font-size: 1rem;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Optional fade-in animation for the success message */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .nav-links {
   display: flex;
   gap: 15px;
@@ -237,14 +253,14 @@ body {
 .nav-links a {
   text-decoration: none;
   color: white;
-  background-color: #028090;
+  background-color: #08a4cf;
   padding: 10px 15px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .nav-links a:hover {
-  background-color: #026f75;
+  background-color: #08a4cf;
 }
 
 .nav-links .logout-btn {
