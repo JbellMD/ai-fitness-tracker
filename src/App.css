@@ -1,19 +1,38 @@
-/* General Styles */
+/* Global background image for the entire app */
 body {
-  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #eef2f5;
+  background-image: url("./runner.jpg"); /* Adjust the path if necessary */
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-position: center; /* Centers the image */
+  background-attachment: fixed; /* Keeps the image fixed during scrolling */
+  background-repeat: no-repeat;
+  font-family: "Roboto", sans-serif;
   color: #333;
 }
 
+/* General container styling to ensure readability */
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 20px;
   min-height: 100vh;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Controls the width of the content */
+  margin: 0 auto; /* Horizontally centers the container */
+  display: flex;
+  flex-direction: column; /* Aligns children vertically */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
 }
+
+@media (max-width: 768px) {
+  .App {
+    max-width: 90%; /* Use a percentage width for smaller screens */
+    padding: 15px;
+  }
+}
+
+
 
 /* Header */
 .App-header {
