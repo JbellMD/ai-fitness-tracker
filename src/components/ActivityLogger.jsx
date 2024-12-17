@@ -48,18 +48,30 @@ const ActivityLogger = () => {
       acc[activity.activity] = (acc[activity.activity] || 0) + activity.duration;
       return acc;
     }, {});
-
+  
+    // Map activity names to their respective colors
+    const activityColors = {
+      running: "#4caf50",      // Green for Running
+      yoga: "#f44336",         // Red for Yoga
+      weightlifting: "#2196f3" // Blue for Weightlifting
+    };
+  
+    // Assign colors based on the activities
+    const labels = Object.keys(activityDurations);
+    const backgroundColors = labels.map((label) => activityColors[label] || "#ccc"); // Default to grey if not mapped
+  
     setChartData({
-      labels: Object.keys(activityDurations),
+      labels: labels,
       datasets: [
         {
           label: "Total Duration (minutes)",
           data: Object.values(activityDurations),
-          backgroundColor: ["#028090", "#02c39a", "#fcbf49"],
+          backgroundColor: backgroundColors, // Use dynamic colors
         },
       ],
     });
   };
+  
 
   const onSubmit = async (data) => {
     try {
