@@ -26,8 +26,11 @@ const NutritionTracker = () => {
       onValue(logsRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
-          const logs = Object.values(data);
-          setNutritionLogs(logs);
+          const logs = Object.entries(data).map(([key, value]) => ({
+            id: key,
+            ...value,
+          }));
+          setNutritionLogs(logs.reverse()); // Show the latest logs first
           prepareChartData(logs);
         }
       });
@@ -135,6 +138,21 @@ const NutritionTracker = () => {
       {chartData && (
         <div className="chart-box">
           <Pie data={chartData} />
+        </div>
+      )}
+
+      {/* Nutrition Logs */}
+      {nutritionLogs.length > 0 && (
+        <div className="nutrition-logs">
+          <h3>Logged Meals</h3>
+          <ul>
+            {nutritionLogs.map((log) => (
+              <li key={log.id} className="log-entry">
+                <strong>{log.foodName}</strong> - {log.calories} kcal ({log.mealType}) 
+                <span>Logged at: {new Date(log.timestamp).toLocaleString()}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
