@@ -148,23 +148,24 @@ body {
 /* Chart Box Styling (Enlarged by 1.5x-2x) */
 .chart-box {
   flex: 1;
-  min-width: 600px;
-  max-width: 50%; /* Expanded size */
-  background-color: #ffffff;
-  padding: 30px;
+  min-width: 450px; /* Increase to make the chart larger */
+  max-width: 600px; /* Set a max-width to keep it proportionate */
+  background: white;
   border-radius: 10px;
+  padding: 30px; /* Increased padding for better spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+
 .logger-box {
   flex: 1; /* Slightly smaller */
 }
 
 .chart-box {
-  flex: 1; /* Slightly larger */
+  flex: .9; /* Slightly larger */
 }
 
 /* Forms */
@@ -297,4 +298,98 @@ form label {
   font-size: 1.1rem;
   font-style: italic;
   color: #555;
+}
+
+/* Logger, List, and Chart Container */
+.logger-chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* Space between components */
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Logger Box */
+.logger-box {
+  flex: 1;
+  min-width: 350px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* List Box (new container for nutrition logs) */
+.list-box {
+  flex: 1;
+  min-width: 350px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 800px; /* Increase height for a taller box */
+  height: auto; /* Allow the box to grow if necessary */
+  overflow-y: auto; /* Adds scroll if content exceeds height */
+}
+
+
+/* Nutrition List Styling */
+.nutrition-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nutrition-list .log-entry {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-list .log-entry strong {
+  font-size: 1.1rem;
+  color: #028090;
+}
+
+.nutrition-list .log-entry span {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.total-calories {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #02c39a;
+}
+
+/* Chart Box */
+.chart-box {
+  flex: 1;
+  min-width: 700px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-chart-box {
+  flex: 1;
+  min-width: 400px; /* Adjust size */
+  max-width: 486px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically centers content */
+  margin-top: -555px; /* Pull the chart closer to the logger */
 }
