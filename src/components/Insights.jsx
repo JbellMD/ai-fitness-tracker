@@ -1,34 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
-import { ref, onValue } from "firebase/database"; // Import Realtime Database methods
+import { ref, onValue } from "firebase/database";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 
 const Insights = () => {
-  const [activities, setActivities] = useState([]); // Store activity data
-  const [insight, setInsight] = useState("");
+  const [activities, setActivities] = useState([]); // Store fetched activities
+  const [insight, setInsight] = useState(""); // AI-driven insights
   const [loading, setLoading] = useState(true);
 
   // Fetch activities from Realtime Database
   useEffect(() => {
     const fetchActivities = () => {
-      const activitiesRef = ref(database, "activities"); // Path to activities in Realtime Database
+      const activitiesRef = ref(database, "activities");
 
-      onValue(activitiesRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const fetchedActivities = Object.values(data);
-          setActivities(fetchedActivities);
-          generateInsight(fetchedActivities);
-        } else {
-          setActivities([]);
-          setInsight("No activities logged yet to generate insights.");
+      onValue(
+        activitiesRef,
+        (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            const fetchedActivities = Object.values(data);
+            setActivities(fetchedActivities);
+            generateInsight(fetchedActivities);
+          } else {
+            setActivities([]);
+            setInsight("No activities logged yet to generate insights.");
+            setLoading(false);
+          }
+        },
+        (error) => {
+          console.error("Error fetching activities: ", error);
+          setInsight("Unable to fetch activities at this time.");
           setLoading(false);
         }
-      }, (error) => {
-        console.error("Error fetching activities: ", error);
-        setLoading(false);
-      });
+      );
     };
 
     fetchActivities();
@@ -74,10 +79,28 @@ const Insights = () => {
   return (
     <div className="white-box insights">
       <h2>Activity Insights</h2>
+
       {loading ? (
         <CircularProgress />
       ) : (
-        <p>{insight}</p>
+        <>
+          {/* Display the list of activities */}
+          {activities.length > 0 && (
+            <div className="activity-summary">
+              <h3>Logged Activities</h3>
+              <ul>
+                {activities.map((activity, index) => (
+                  <li key={index}>
+                    {activity.activity}: {activity.duration} mins
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* AI-generated Insight */}
+          <p>{insight}</p>
+        </>
       )}
     </div>
   );
