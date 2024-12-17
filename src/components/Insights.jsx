@@ -76,6 +76,20 @@ const Insights = () => {
     }
   };
 
+  // Assign a class based on activity type
+  const getActivityClass = (activityType) => {
+    switch (activityType) {
+      case "running":
+        return "activity-running";
+      case "yoga":
+        return "activity-yoga";
+      case "weightlifting":
+        return "activity-weightlifting";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className="white-box insights">
       <h2>Activity Insights</h2>
@@ -90,7 +104,7 @@ const Insights = () => {
               <h3>Logged Activities</h3>
               <ul>
                 {activities.map((activity, index) => (
-                  <li key={index}>
+                  <li key={index} className={`activity-item ${getActivityClass(activity.activity)}`}>
                     {activity.activity}: {activity.duration} mins
                   </li>
                 ))}
@@ -99,7 +113,7 @@ const Insights = () => {
           )}
 
           {/* AI-generated Insight */}
-          <p>{insight}</p>
+          <p className="insight-text">{insight}</p>
         </>
       )}
     </div>
@@ -107,3 +121,4 @@ const Insights = () => {
 };
 
 export default Insights;
+
