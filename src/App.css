@@ -393,3 +393,96 @@ form label {
   align-items: center; /* Vertically centers content */
   margin-top: -555px; /* Pull the chart closer to the logger */
 }
+
+.calories-info {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #028090;
+}
+
+.recommendations {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.recommendations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recommendations li {
+  padding: 10px;
+  margin: 10px 0;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+
+.recommendations li.activity-running {
+  background-color: #4caf50;
+  color: white;
+}
+
+.recommendations li.activity-yoga {
+  background-color: #f44336;
+  color: white;
+}
+
+.recommendations li.activity-weightlifting {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Insights Page Layout */
+.insights-container {
+  display: flex;
+  justify-content: space-between; /* Space between left and right sections */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Space between columns */
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Left Section: Activity Log */
+.activity-log {
+  flex: 1; /* Takes equal space */
+  min-width: 350px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 500px; /* Set max height for scrolling */
+  overflow-y: auto;
+}
+
+/* Right Section: Recommendations and Chart */
+.right-insights {
+  flex: 1.5; /* Slightly larger than the left column */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between recommendations and chart */
+}
+
+/* Recommendations Box */
+.recommendations {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Line Chart Box */
+.chart-box {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px; /* Fixed height for the chart */
+}
+
