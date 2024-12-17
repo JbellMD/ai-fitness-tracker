@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { db, auth } from "../firebase";
-import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { database, auth } from "../firebase"; // Import updated `database`
+import { ref, push, onValue, query, orderByChild } from "firebase/database"; // Realtime Database methods
 
 const NutritionTracker = () => {
   const [foodName, setFoodName] = useState("");
@@ -14,13 +14,21 @@ const NutritionTracker = () => {
       const user = auth.currentUser;
       if (!user) return;
 
-      const q = query(
-        collection(db, `users/${user.uid}/nutritionLogs`),
-        orderBy("timestamp", "desc")
+      const logsRef = query(
+        ref(database, `users/${user.uid}/nutritionLogs`),
+        orderByChild("timestamp")
       );
-      const snapshot = await getDocs(q);
-      const logs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setNutritionLogs(logs);
+
+      onValue(logsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const logs = Object.entries(data).map(([key, value]) => ({
+            id: key,
+            ...value,
+          }));
+          setNutritionLogs(logs.reverse()); // Reverse to show most recent first
+        }
+      });
     } catch (error) {
       console.error("Error fetching nutrition logs:", error);
     }
@@ -36,10 +44,10 @@ const NutritionTracker = () => {
         foodName,
         calories: parseInt(calories, 10),
         mealType,
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
       };
 
-      await addDoc(collection(db, `users/${user.uid}/nutritionLogs`), newMeal);
+      await push(ref(database, `users/${user.uid}/nutritionLogs`), newMeal);
       setSuccessMessage("Meal logged successfully!");
       fetchNutritionLogs(); // Refresh the list
       setFoodName("");

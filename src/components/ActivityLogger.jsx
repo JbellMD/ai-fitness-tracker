@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { database } from "../firebase"; // Import the updated `database`
+import { ref, push } from "firebase/database"; // Realtime Database methods
 import { MdDirectionsRun, MdSelfImprovement, MdFitnessCenter } from "react-icons/md";
 
 const ActivityLogger = () => {
@@ -14,11 +14,12 @@ const ActivityLogger = () => {
     try {
       const caloriesBurned = calculateCalories(data.activity, data.duration);
 
-      await addDoc(collection(db, "activities"), {
+      // Push data to Realtime Database
+      await push(ref(database, "activities"), {
         activity: data.activity,
         duration: parseInt(data.duration, 10), // Convert to number
         calories: caloriesBurned, // Add calorie estimate
-        timestamp: new Date(), // Timestamp for trends
+        timestamp: new Date().toISOString(), // Store timestamp in ISO format
       });
 
       setSuccessMessage("Activity logged successfully!");
