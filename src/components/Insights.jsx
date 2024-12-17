@@ -19,7 +19,7 @@ const Insights = () => {
         (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            const fetchedActivities = Object.values(data);
+            const fetchedActivities = Object.values(data).reverse(); // Reverse the order
             setActivities(fetchedActivities);
             generateInsight(fetchedActivities);
           } else {
@@ -34,6 +34,7 @@ const Insights = () => {
           setLoading(false);
         }
       );
+      
     };
 
     fetchActivities();
