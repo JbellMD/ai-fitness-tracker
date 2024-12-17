@@ -3,7 +3,6 @@ import { database, auth } from "../firebase";
 import { ref, push, onValue } from "firebase/database";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { filterDataByDate } from "../utils/dateFilters"; // Import helper function
 import { motion } from "framer-motion";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -14,7 +13,6 @@ const NutritionTracker = () => {
   const [mealType, setMealType] = useState("breakfast");
   const [chartData, setChartData] = useState(null);
   const [allMeals, setAllMeals] = useState([]); // Store all meals
-  const [filterType, setFilterType] = useState("day"); // Default filter: day
   const [successMessage, setSuccessMessage] = useState("");
   const [totalCalories, setTotalCalories] = useState(0); // Total calorie count
 
