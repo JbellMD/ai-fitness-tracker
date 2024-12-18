@@ -3,7 +3,6 @@ import { database } from "../firebase";
 import { ref, onValue } from "firebase/database";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
-import { CircularProgress } from "@mui/material";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -47,6 +46,42 @@ const Insights = () => {
     fetchActivities();
   }, []);
 
+  // Prepare chart data for Line graph
+  const prepareChartData = (data) => {
+    const sortedData = data
+      .map((activity) => ({
+        date: new Date(activity.timestamp).toLocaleDateString(),
+        duration: activity.duration,
+      }))
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const labels = sortedData.map((entry) => entry.date);
+    const durations = sortedData.map((entry) => entry.duration);
+
+    setChartData({
+      labels,
+      datasets: [
+        {
+          label: "Activity Duration (minutes)",
+          data: durations,
+          borderColor: "#028090",
+          backgroundColor: "rgba(2, 128, 144, 0.2)",
+          tension: 0.4,
+        },
+      ],
+    });
+  };
+
+  // Generate simple recommendations
+  const generateRecommendations = (data) => {
+    const activityTypes = [...new Set(data.map((item) => item.activity))];
+
+    const allActivities = ["running", "yoga", "weightlifting", "swimming", "pilates"];
+    const recommendationsList = allActivities.filter((rec) => !activityTypes.includes(rec));
+
+    setRecommendations(recommendationsList);
+  };
+
   // Generate AI-driven insights
   const generateInsight = async (data) => {
     try {
@@ -84,43 +119,6 @@ const Insights = () => {
     }
   };
 
-  // Prepare chart data for Line graph
-  const prepareChartData = (data) => {
-    const sortedData = data
-      .map((activity) => ({
-        date: new Date(activity.timestamp).toLocaleDateString(),
-        duration: activity.duration,
-      }))
-      .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    const labels = sortedData.map((entry) => entry.date);
-    const durations = sortedData.map((entry) => entry.duration);
-
-    setChartData({
-      labels,
-      datasets: [
-        {
-          label: "Activity Duration (minutes)",
-          data: durations,
-          borderColor: "#028090",
-          backgroundColor: "rgba(2, 128, 144, 0.2)",
-          tension: 0.4,
-        },
-      ],
-    });
-  };
-
-  // Generate simple recommendations
-  const generateRecommendations = (data) => {
-    const activityTypes = [...new Set(data.map((item) => item.activity))];
-
-    const recommendationsList = ["running", "yoga", "weightlifting"].filter(
-      (rec) => !activityTypes.includes(rec)
-    );
-
-    setRecommendations(recommendationsList);
-  };
-
   // Assign a class based on activity type
   const getActivityClass = (activityType) => {
     switch (activityType) {
@@ -130,6 +128,10 @@ const Insights = () => {
         return "activity-yoga";
       case "weightlifting":
         return "activity-weightlifting";
+      case "swimming":
+        return "activity-swimming";
+      case "pilates":
+        return "activity-pilates";
       default:
         return "";
     }

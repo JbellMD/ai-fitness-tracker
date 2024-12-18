@@ -142,6 +142,8 @@ body {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
+  min-height: 400px;
+  max-height: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -329,7 +331,7 @@ form label {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: 800px; /* Increase height for a taller box */
+  max-height: 925px; /* Increase height for a taller box */
   height: auto; /* Allow the box to grow if necessary */
   overflow-y: auto; /* Adds scroll if content exceeds height */
 }
@@ -403,7 +405,7 @@ form label {
 }
 
 .recommendations {
-  margin-top: 20px;
+  margin-top: 0px;
   text-align: center;
 }
 
@@ -486,3 +488,12 @@ form label {
   height: 350px; /* Fixed height for the chart */
 }
 
+.activity-swimming {
+  background-color: #00bcd4; /* Cyan for Swimming */
+  color: white;
+}
+
+.activity-pilates {
+  background-color: #9c27b0; /* Purple for Pilates */
+  color: white;
+}

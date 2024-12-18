@@ -48,36 +48,38 @@ const ActivityLogger = () => {
       acc[activity.activity] = (acc[activity.activity] || 0) + activity.duration;
       return acc;
     }, {});
-  
+
     // Map activity names to their respective colors
     const activityColors = {
-      running: "#4caf50",      // Green for Running
-      yoga: "#f44336",         // Red for Yoga
-      weightlifting: "#2196f3" // Blue for Weightlifting
+      running: "#4caf50",      // Green
+      yoga: "#f44336",         // Red
+      weightlifting: "#2196f3", // Blue
+      swimming: "#00bcd4",     // Cyan
+      pilates: "#9c27b0",      // Purple
     };
-  
+
     // Assign colors based on the activities
     const labels = Object.keys(activityDurations);
-    const backgroundColors = labels.map((label) => activityColors[label] || "#ccc"); // Default to grey if not mapped
-  
+    const backgroundColors = labels.map((label) => activityColors[label] || "#ccc");
+
     setChartData({
       labels: labels,
       datasets: [
         {
           label: "Total Duration (minutes)",
           data: Object.values(activityDurations),
-          backgroundColor: backgroundColors, // Use dynamic colors
+          backgroundColor: backgroundColors,
         },
       ],
     });
   };
-  
 
   const onSubmit = async (data) => {
     try {
       await push(ref(database, "activities"), {
         activity: data.activity,
         duration: parseInt(data.duration, 10),
+        intensity: data.intensity, // Store intensity level
         timestamp: new Date().toISOString(),
         timestampNum: Date.now(),
       });
@@ -117,6 +119,8 @@ const ActivityLogger = () => {
                 <option value="running">Running</option>
                 <option value="yoga">Yoga</option>
                 <option value="weightlifting">Weightlifting</option>
+                <option value="swimming">Swimming</option>
+                <option value="pilates">Pilates</option>
               </select>
             </div>
             <div className="form-group">
@@ -128,6 +132,14 @@ const ActivityLogger = () => {
                 min="1"
                 required
               />
+            </div>
+            <div className="form-group">
+              <label>Intensity Level</label>
+              <select {...register("intensity")} required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
             </div>
             <button type="submit" className="auth-btn">
               Log Activity
