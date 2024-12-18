@@ -155,19 +155,20 @@ const Insights = () => {
       <div className="right-insights">
         {/* Recommendations */}
         <div className="recommendations">
-          <h3>Recommended Activities</h3>
-          {recommendations.length > 0 ? (
-            <ul>
-              {recommendations.map((rec, index) => (
-                <li key={index} className={`activity-item activity-${rec}`}>
-                  Try {rec} to mix up your routine!
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>You're already doing a balanced set of activities! Keep it up!</p>
-          )}
-        </div>
+            <h3>Recommended Activities</h3>
+            {recommendations.length > 0 ? (
+    <ul>
+        {recommendations.map((rec, index) => (
+        <li key={index} className={`activity-item activity-${rec}`}>
+          Try {rec.charAt(0).toUpperCase() + rec.slice(1)} to mix up your routine!
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>You're already doing a balanced set of activities! Keep it up!</p>
+  )}
+</div>
+
 
         {/* Line Chart */}
         <div className="chart-box">

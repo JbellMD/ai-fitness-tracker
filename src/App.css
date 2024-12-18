@@ -116,11 +116,15 @@ body {
 /* Make the filter dropdown appear above both boxes */
 .filter-dropdown {
   width: 100%;
-  text-align: center;
+  text-align: flex;
+  margin-top: -5px;
   margin-bottom: 20px;
+  margin-left: 325px;
+
 }
 
 .filter-dropdown label {
+  color: #028090; /* Choose any color you like */
   font-size: 1.1rem;
   font-weight: bold;
   margin-right: 10px;
@@ -145,13 +149,14 @@ body {
   min-height: 400px;
   max-height: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
 }
 
 /* Chart Box Styling (Enlarged by 1.5x-2x) */
 .chart-box {
   flex: 1;
-  min-width: 450px; /* Increase to make the chart larger */
-  max-width: 600px; /* Set a max-width to keep it proportionate */
+  min-width: 550px; /* Increase to make the chart larger */
+  max-width: 700px; /* Set a max-width to keep it proportionate */
   background: white;
   border-radius: 10px;
   padding: 30px; /* Increased padding for better spacing */
@@ -167,7 +172,7 @@ body {
 }
 
 .chart-box {
-  flex: .9; /* Slightly larger */
+  flex: 1; /* Slightly larger */
 }
 
 /* Forms */
@@ -211,7 +216,7 @@ form label {
 
 /* Nutrition Logs */
 .nutrition-logs {
-  margin-top: 20px;
+  margin-top: -30px;
   padding: 15px;
   background: #ffffff;
   border-radius: 10px;
@@ -334,6 +339,7 @@ form label {
   max-height: 925px; /* Increase height for a taller box */
   height: auto; /* Allow the box to grow if necessary */
   overflow-y: auto; /* Adds scroll if content exceeds height */
+  margin-top: 0px;
 }
 
 
@@ -376,6 +382,7 @@ form label {
 .chart-box {
   flex: 1;
   min-width: 700px;
+  max-height: 800px;
   background: white;
   border-radius: 10px;
   padding: 20px;
@@ -421,6 +428,16 @@ form label {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
+}
+
+.recommendations li.activity-swimming {
+  background-color: #00bcd4; /* Cyan for Swimming */
+  color: white;
+}
+
+.recommendations li.activity-pilates {
+  background-color: #9c27b0; /* Purple for Pilates */
+  color: white;
 }
 
 .recommendations li.activity-running {
@@ -488,6 +505,7 @@ form label {
   height: 350px; /* Fixed height for the chart */
 }
 
+
 .activity-swimming {
   background-color: #00bcd4; /* Cyan for Swimming */
   color: white;
@@ -495,5 +513,20 @@ form label {
 
 .activity-pilates {
   background-color: #9c27b0; /* Purple for Pilates */
+  color: white;
+}
+
+.activity-running {
+  background-color: #4caf50; /* Green for Running */
+  color: white;
+}
+
+.activity-yoga {
+  background-color: #f44336; /* Red for Yoga */
+  color: white;
+}
+
+.activity-weightlifting {
+  background-color: #2196f3; /* Blue for Weightlifting */
   color: white;
 }
