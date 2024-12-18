@@ -4,6 +4,7 @@ import { ref, push, onValue } from "firebase/database";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { motion } from "framer-motion";
+import axios from "axios"; // For API calls
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -12,9 +13,10 @@ const NutritionTracker = () => {
   const [calories, setCalories] = useState("");
   const [mealType, setMealType] = useState("breakfast");
   const [chartData, setChartData] = useState(null);
-  const [allMeals, setAllMeals] = useState([]); // Store all meals
+  const [allMeals, setAllMeals] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
-  const [totalCalories, setTotalCalories] = useState(0); // Total calorie count
+  const [totalCalories, setTotalCalories] = useState(0);
 
   // Fetch meals from Firebase
   useEffect(() => {
@@ -29,7 +31,7 @@ const NutritionTracker = () => {
         if (data) {
           const fetchedMeals = Object.entries(data)
             .map(([key, value]) => ({ id: key, ...value }))
-            .sort((a, b) => b.timestampNum - a.timestampNum); // Sort latest first
+            .sort((a, b) => b.timestampNum - a.timestampNum);
 
           setAllMeals(fetchedMeals);
           prepareChartData(fetchedMeals);
@@ -41,7 +43,35 @@ const NutritionTracker = () => {
     fetchMeals();
   }, []);
 
-  // Prepare chart data
+  // Fetch food suggestions
+  useEffect(() => {
+    const fetchFoodSuggestions = async () => {
+      if (foodName.trim() === "") {
+        setSuggestions([]);
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `https://trackapi.nutritionix.com/v2/search/instant`,
+          {
+            params: { query: foodName },
+            headers: {
+              "x-app-id": process.env.REACT_APP_NUTRITIONIX_APP_ID,
+              "x-app-key": process.env.REACT_APP_NUTRITIONIX_API_KEY,
+            },
+          }
+        );
+
+        setSuggestions(response.data.common || []);
+      } catch (error) {
+        console.error("Error fetching food suggestions: ", error);
+      }
+    };
+
+    fetchFoodSuggestions();
+  }, [foodName]);
+
   const prepareChartData = (data) => {
     const caloriesByMealType = data.reduce((acc, meal) => {
       acc[meal.mealType] = (acc[meal.mealType] || 0) + meal.calories;
@@ -59,13 +89,11 @@ const NutritionTracker = () => {
     });
   };
 
-  // Calculate total calories
   const calculateTotalCalories = (data) => {
     const total = data.reduce((sum, meal) => sum + meal.calories, 0);
     setTotalCalories(total);
   };
 
-  // Handle meal addition
   const handleAddMeal = async (e) => {
     e.preventDefault();
     try {
@@ -94,7 +122,6 @@ const NutritionTracker = () => {
 
   return (
     <div className="logger-chart-container">
-      {/* Logger Component */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -111,6 +138,21 @@ const NutritionTracker = () => {
               placeholder="Enter food name"
               required
             />
+            {suggestions.length > 0 && (
+              <ul className="suggestions-list">
+                {suggestions.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setFoodName(item.food_name);
+                      setSuggestions([]);
+                    }}
+                  >
+                    {item.food_name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div className="form-group">
             <label>Calories</label>
@@ -144,22 +186,22 @@ const NutritionTracker = () => {
         {successMessage && <p className="success-text">{successMessage}</p>}
       </motion.div>
 
-        {/* List Component */}
-  <div className="white-box list-box">
-    <h2>Nutrition Logs</h2>
-    <ul className="nutrition-list">
-      {allMeals.map((meal) => (
-        <li key={meal.id} className="log-entry">
-          <strong>{meal.foodName}</strong> - {meal.calories} kcal ({meal.mealType})
-          <br />
-          <span>Logged at: {new Date(meal.timestamp).toLocaleString()}</span>
-        </li>
-      ))}
-    </ul>
-    <div className="total-calories">
-      <h4>Total Calories: {totalCalories} kcal</h4>
-    </div>
-  </div>
+      {/* List Component */}
+      <div className="white-box list-box">
+        <h2>Nutrition Logs</h2>
+        <ul className="nutrition-list">
+          {allMeals.map((meal) => (
+            <li key={meal.id} className="log-entry">
+              <strong>{meal.foodName}</strong> - {meal.calories} kcal ({meal.mealType})
+              <br />
+              <span>Logged at: {new Date(meal.timestamp).toLocaleString()}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="total-calories">
+          <h4>Total Calories: {totalCalories} kcal</h4>
+        </div>
+      </div>
 
       {/* Chart Component */}
       {chartData ? (

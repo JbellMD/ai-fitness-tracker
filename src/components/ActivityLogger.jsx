@@ -30,35 +30,39 @@ const ActivityLogger = () => {
 
     onValue(activitiesRef, (snapshot) => {
       const data = snapshot.val();
+      console.log("Fetched activities data: ", data); // Debugging
       if (data) {
         const fetchedActivities = Object.values(data);
         setAllActivities(fetchedActivities);
+      } else {
+        setAllActivities([]); // Clear state if no data is found
       }
     });
   }, []);
 
   // Filter and prepare chart data
   useEffect(() => {
+    console.log("All activities updated: ", allActivities); // Debugging
     const filteredActivities = filterDataByDate(allActivities, filterType);
+    console.log("Filtered activities for chart: ", filteredActivities); // Debugging
     prepareChartData(filteredActivities);
   }, [allActivities, filterType]);
 
   const prepareChartData = (data) => {
+    console.log("Preparing chart data with: ", data); // Debugging
     const activityDurations = data.reduce((acc, activity) => {
       acc[activity.activity] = (acc[activity.activity] || 0) + activity.duration;
       return acc;
     }, {});
 
-    // Map activity names to their respective colors
     const activityColors = {
-      running: "#4caf50",      // Green
-      yoga: "#f44336",         // Red
+      running: "#4caf50", // Green
+      yoga: "#f44336", // Red
       weightlifting: "#2196f3", // Blue
-      swimming: "#00bcd4",     // Cyan
-      pilates: "#9c27b0",      // Purple
+      swimming: "#00bcd4", // Cyan
+      pilates: "#9c27b0", // Purple
     };
 
-    // Assign colors based on the activities
     const labels = Object.keys(activityDurations);
     const backgroundColors = labels.map((label) => activityColors[label] || "#ccc");
 
@@ -76,18 +80,27 @@ const ActivityLogger = () => {
 
   const onSubmit = async (data) => {
     try {
-      await push(ref(database, "activities"), {
+      console.log("Submitting Data: ", data); // Debugging
+
+      const newActivity = {
         activity: data.activity,
         duration: parseInt(data.duration, 10),
         intensity: data.intensity, // Store intensity level
         timestamp: new Date().toISOString(),
         timestampNum: Date.now(),
-      });
+      };
+
+      await push(ref(database, "activities"), newActivity);
+      console.log("Activity logged successfully!"); // Debugging
+
+      // Add activity to local state to trigger real-time updates
+      setAllActivities((prevActivities) => [...prevActivities, newActivity]);
+
       setSuccessMessage("Activity logged successfully!");
       reset();
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error) {
-      console.error("Error adding activity: ", error);
+      console.error("Error adding activity:", error);
     }
   };
 
