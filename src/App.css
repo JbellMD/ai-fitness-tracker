@@ -336,8 +336,7 @@ form label {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-height: 925px; /* Increase height for a taller box */
-  height: auto; /* Allow the box to grow if necessary */
+  max-height: 425px; /* Increase height for a taller box */
   overflow-y: auto; /* Adds scroll if content exceeds height */
   margin-top: 0px;
 }
@@ -400,7 +399,7 @@ form label {
   display: flex;
   justify-content: center;
   align-items: center; /* Vertically centers content */
-  margin-top: -555px; /* Pull the chart closer to the logger */
+  margin-top: -40px; /* Pull the chart closer to the logger */
 }
 
 .calories-info {
@@ -530,3 +529,82 @@ form label {
   background-color: #2196f3; /* Blue for Weightlifting */
   color: white;
 }
+
+/* Nutrient Suggestions Container */
+.suggestions-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px;
+  margin-top: -20px; /* Pull the chart closer to the logger */
+}
+
+.suggestions-container h3 {
+  font-size: 1.5rem;
+  color: #028090;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.remaining-nutrients {
+  margin-bottom: 20px;
+}
+
+.remaining-nutrients h4 {
+  font-size: 1.2rem;
+  color: #02c39a;
+  margin-bottom: 10px;
+}
+
+.remaining-nutrients ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.remaining-nutrients li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #333;
+}
+
+.food-suggestions {
+  margin-top: 20px;
+}
+
+.food-suggestions h4 {
+  font-size: 1.2rem;
+  color: #f77f00;
+  margin-bottom: 10px;
+}
+
+.food-suggestions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.food-suggestions li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.food-suggestions li:hover {
+  transform: scale(1.05);
+  background-color: #fcbf49;
+  color: white;
+}
+

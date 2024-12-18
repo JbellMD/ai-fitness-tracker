@@ -4,7 +4,8 @@ import { ref, push, onValue } from "firebase/database";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { motion } from "framer-motion";
-import axios from "axios"; // For API calls
+import NutrientSuggestions from "./NutrientSuggestions";
+import axios from "axios"; // Import axios for API calls
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -14,9 +15,18 @@ const NutritionTracker = () => {
   const [mealType, setMealType] = useState("breakfast");
   const [chartData, setChartData] = useState(null);
   const [allMeals, setAllMeals] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState([]); // Food suggestions state
   const [successMessage, setSuccessMessage] = useState("");
   const [totalCalories, setTotalCalories] = useState(0);
+
+  const dietGoals = {
+    calories: 2000,
+    protein: 50,
+    carbohydrates: 275,
+    fats: 70,
+    fiber: 28,
+    sugar: 36,
+  };
 
   // Fetch meals from Firebase
   useEffect(() => {
@@ -104,6 +114,14 @@ const NutritionTracker = () => {
         foodName,
         calories: parseFloat(calories),
         mealType,
+        nutrients: {
+          calories: parseFloat(calories),
+          protein: Math.random() * 20,
+          carbohydrates: Math.random() * 50,
+          fats: Math.random() * 10,
+          fiber: Math.random() * 5,
+          sugar: Math.random() * 10,
+        },
         timestamp: new Date().toISOString(),
         timestampNum: Date.now(),
       };
@@ -186,7 +204,6 @@ const NutritionTracker = () => {
         {successMessage && <p className="success-text">{successMessage}</p>}
       </motion.div>
 
-      {/* List Component */}
       <div className="white-box list-box">
         <h2>Nutrition Logs</h2>
         <ul className="nutrition-list">
@@ -203,7 +220,6 @@ const NutritionTracker = () => {
         </div>
       </div>
 
-      {/* Chart Component */}
       {chartData ? (
         <div className="nutrition-chart-box">
           <Pie data={chartData} />
@@ -213,6 +229,8 @@ const NutritionTracker = () => {
           <p>No meal data to display yet.</p>
         </div>
       )}
+
+      <NutrientSuggestions loggedMeals={allMeals} dietGoals={dietGoals} />
     </div>
   );
 };
