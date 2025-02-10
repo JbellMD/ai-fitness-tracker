@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { auth } from "./firebase";
 import { signOut } from "firebase/auth";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 function App() {
   const [user, setUser] = useState(null); // State to track the logged-in user
@@ -33,53 +34,55 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="App">
-        {/* Header Section */}
-        <header className="App-header">
-          <h1>AI Fitness Tracker</h1>
-          <p>Log your activities and gain insights into your fitness journey!</p>
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          {/* Header Section */}
+          <header className="App-header">
+            <h1>AI Fitness Tracker</h1>
+            <p>Log your activities and gain insights into your fitness journey!</p>
 
-          {/* Navigation Links */}
-          {user && (
-            <nav className="nav-links">
-              <Link to="/">Activity Logger</Link>
-              <Link to="/insights">Insights</Link>
-              <Link to="/nutrition">Nutrition Tracker</Link>
-              <button onClick={handleLogout} className="logout-btn">
-                Sign Out
-              </button>
-            </nav>
-          )}
-        </header>
+            {/* Navigation Links */}
+            {user && (
+              <nav className="nav-links">
+                <Link to="/">Activity Logger</Link>
+                <Link to="/insights">Insights</Link>
+                <Link to="/nutrition">Nutrition Tracker</Link>
+                <button onClick={handleLogout} className="logout-btn">
+                  Sign Out
+                </button>
+              </nav>
+            )}
+          </header>
 
-        {/* Routes */}
-        <Routes>
-          {/* Login Route */}
-          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+          {/* Routes */}
+          <Routes>
+            {/* Login Route */}
+            <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
 
-          {/* Register Route */}
-          <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+            {/* Register Route */}
+            <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/"
-            element={user ? <ActivityLogger /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/insights"
-            element={user ? <Insights /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/nutrition"
-            element={user ? <NutritionTracker /> : <Navigate to="/login" />}
-          />
+            {/* Protected Routes */}
+            <Route
+              path="/"
+              element={user ? <ActivityLogger /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/insights"
+              element={user ? <Insights /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/nutrition"
+              element={user ? <NutritionTracker /> : <Navigate to="/login" />}
+            />
 
-          {/* Fallback for unknown routes */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </div>
-    </Router>
+            {/* Fallback for unknown routes */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

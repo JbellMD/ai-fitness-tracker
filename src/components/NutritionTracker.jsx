@@ -226,7 +226,7 @@ const NutritionTracker = () => {
         </div>
       ) : (
         <div className="chart-box">
-          <p>No meal data to display yet.</p>
+          <p>No meal data to display yet. Please add one now!</p>
         </div>
       )}
 
