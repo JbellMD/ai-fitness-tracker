@@ -177,7 +177,7 @@ const ActivityLogger = () => {
           </div>
         ) : (
           <div className="chart-box">
-            <p>No activity data to display yet.</p>
+            <p>No activity data to display yet. Please log an activity now!</p>
           </div>
         )}
       </div>
